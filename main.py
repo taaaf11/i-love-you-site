@@ -3,6 +3,7 @@ import flet as ft
 
 
 def heart_container(from_: str, *args, **kwargs):
+    print(f"{from_=}")
     return ft.Container(
         *args,
         **kwargs,
@@ -67,10 +68,21 @@ def main(page: ft.Page):
     #         # fit=ft.StackFit.PASS_THROUGH,
     #     )
     # )
+    def set_from(e):
+        page.controls.clear()
+        page.update()
+        page.add(
+            heart_container(
+                " ".join(page.route.split("/")[1:])
+            ),
+        )
+        # page.update()
     page.add(
         # ft.Container(heart_container("Test"), expand=True),
         # heart_container("Test", expand=True),
-        heart_container(page.route.split("/")[1]),
+        heart_container(
+            " ".join(page.route.split("/")[1:])
+        ),
         # ft.Container(expand=True),
         # ft.Container(expand=True),
         # ft.Container(
@@ -82,7 +94,8 @@ def main(page: ft.Page):
     )
     print(page.route)
 
-    page.on_route_change = lambda _: print(page.route)
+    # page.on_route_change = lambda _: print(page.route)
+    page.on_route_change = set_from
 
 
 ft.app(main, view=ft.AppView.WEB_BROWSER)
