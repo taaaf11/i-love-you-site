@@ -1,0 +1,9 @@
+[project]
+name = "i-love-you"
+version = "0"
+classifiers = [
+    "Private :: Do Not Upload",
+]
+dependencies = [
+    "flet==0.26.0",
+]
